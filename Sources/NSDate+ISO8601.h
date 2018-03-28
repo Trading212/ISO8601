@@ -14,6 +14,15 @@
 
 @interface NSDate (ISO8601)
 
+#pragma mark - Calendar
+
+/**
+ Set a default caledar to be used by @b dateWithISO8601String:timeZone:usingCalendar: and @b ISO8601StringWithTimeZone:usingCalendar
+
+ @param calendar Default calendar to use or nil(use [NSCalendar currentCalendar])
+ */
++ (void)ISO8601SetDefaultCalendar:(NSCalendar * __nullable)calendar;
+
 #pragma mark - Simple
 
 /**

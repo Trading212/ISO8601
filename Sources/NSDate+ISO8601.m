@@ -11,10 +11,15 @@
 
 @implementation NSDate (ISO8601)
 
+static NSCalendar *_ISO8601DefaultCalendar = nil;
++ (void)ISO8601SetDefaultCalendar:(NSCalendar * __nullable)calendar {
+	_ISO8601DefaultCalendar = calendar;
+}
+
 #pragma mark - Reading
 
 + (NSDate * __nullable)dateWithISO8601String:(NSString *)string {
-	return [self dateWithISO8601String:string timeZone:nil usingCalendar:nil];
+	return [self dateWithISO8601String:string timeZone:nil usingCalendar:_ISO8601DefaultCalendar];
 }
 
 
@@ -44,7 +49,7 @@
 #pragma mark - Writing
 
 - (NSString * __nullable)ISO8601String {
-	return [self ISO8601StringWithTimeZone:[NSTimeZone localTimeZone] usingCalendar:nil];
+	return [self ISO8601StringWithTimeZone:[NSTimeZone localTimeZone] usingCalendar:_ISO8601DefaultCalendar];
 }
 
 
