@@ -68,7 +68,7 @@ static NSCalendar *_ISO8601DefaultCalendar = nil;
 		NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone);
 
 	NSDateComponents *dateComponents = [calendar components:units fromDate:self];
-	return [ISO8601Serialization stringForDateComponents:dateComponents];
+	return [ISO8601Serialization stringForDateComponents:dateComponents forDate:self];
 }
 
 @end

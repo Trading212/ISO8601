@@ -126,7 +126,7 @@
 }
 
 
-+ (NSString * __nullable)stringForDateComponents:(NSDateComponents * __nonnull)components {
++ (NSString * __nullable)stringForDateComponents:(NSDateComponents * __nonnull)components forDate:(NSDate *)date {
 	NSString *string = @"";
 	BOOL hasDate = components.year != NSDateComponentUndefined || components.month != NSDateComponentUndefined || components.day != NSDateComponentUndefined;
 	BOOL hasTime = components.hour != NSDateComponentUndefined || components.minute != NSDateComponentUndefined || components.second != NSDateComponentUndefined || components.timeZone;
@@ -150,8 +150,14 @@
 		return string;
 	}
 
-	if (timeZone.secondsFromGMT != 0) {
-		NSInteger hoursOffset = timeZone.secondsFromGMT / 3600;
+    NSTimeInterval offset = timeZone.secondsFromGMT;
+    NSTimeInterval daylightSavingTimeOffsetDifference = [timeZone daylightSavingTimeOffsetForDate:date] - timeZone.daylightSavingTimeOffset;
+    if (daylightSavingTimeOffsetDifference != 0) {
+        offset += daylightSavingTimeOffsetDifference;
+    }
+    
+	if (offset != 0) {
+		NSInteger hoursOffset = offset / 3600;
 
 		// TODO: Assuming whole hour offsets at the moment
 		NSUInteger secondsOffset = 0;

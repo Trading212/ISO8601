@@ -35,6 +35,6 @@
 
  @return A string containing the date components as an ISO8601 string.
  */
-+ (NSString * __nullable)stringForDateComponents:(NSDateComponents * __nonnull)components;
++ (NSString * __nullable)stringForDateComponents:(NSDateComponents * __nonnull)components forDate:(NSDate * __nonnull)date;
 
 @end
